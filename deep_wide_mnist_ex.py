@@ -12,12 +12,12 @@ Y = tf.placeholder(tf.float32, [None, nb_classes])
 
 W1 = tf.Variable(tf.random_normal([784, 500]), name='weight1')
 b1 = tf.Variable(tf.random_normal([500]), name='bias1')
-layer1 = tf.nn.softmax(tf.matmul(X, W1) + b1)
-#layer1 = tf.sigmoid(tf.matmul(X, W1) + b1)
+#layer1 = tf.nn.softmax(tf.matmul(X, W1) + b1)
+layer1 = tf.sigmoid(tf.matmul(X, W1) + b1)
 W2 = tf.Variable(tf.random_normal([500, 250]), name = 'weight2')
 b2 = tf.Variable(tf.random_normal([250]), name = 'bias2')
-layer2 = tf.nn.softmax(tf.matmul(layer1, W2) + b2)
-#layer2 = tf.sigmoid(tf.matmul(layer1, W2) + b2)
+#layer2 = tf.nn.softmax(tf.matmul(layer1, W2) + b2)
+layer2 = tf.sigmoid(tf.matmul(layer1, W2) + b2)
 W3 = tf.Variable(tf.random_normal([250, nb_classes]), name = 'weight3')
 b3 = tf.Variable(tf.random_normal([nb_classes]), name = 'bias3')
 #layer3 = tf.nn.softmax(tf.matmul(layer2,W3) + b3)
@@ -35,7 +35,7 @@ hypothesis = tf.nn.softmax(tf.matmul(layer2, W3) + b3)
 
 cost = tf.reduce_mean(-tf.reduce_sum(Y * tf.log(hypothesis), axis = 1))
 
-optimizer = tf.train.GradientDescentOptimizer(learning_rate = 1.6).minimize(cost)
+optimizer = tf.train.GradientDescentOptimizer(learning_rate = 0.1).minimize(cost)
 
 
 is_correct = tf.equal(tf.arg_max(hypothesis, 1), tf.arg_max(Y, 1))
