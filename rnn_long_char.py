@@ -32,6 +32,7 @@ for i in range(0, len(sentence) - sequence_length):
     dataY.append(y)
 
 batch_size = len(dataX)
+print(batch_size)
 
 X = tf.placeholder(tf.int32, [None, sequence_length])
 Y = tf.placeholder(tf.int32, [None, sequence_length])
@@ -80,3 +81,5 @@ for j, result in enumerate(results):
         print(''.join([char_set[t] for t in index]), end='')
     else:
         print(char_set[index[-1]], end='')
+
+print(batch_size)
